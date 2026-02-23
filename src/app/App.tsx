@@ -1,9 +1,7 @@
-function App() {
+import HomePages from '@/pages/HomePages';
 
-  return (
-    <>
-    </>
-  )
+function App() {
+  return <HomePages />;
 }
 
-export default App
+export default App;
