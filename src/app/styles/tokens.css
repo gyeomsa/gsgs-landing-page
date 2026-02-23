@@ -1,0 +1,49 @@
+/* Primitive design tokens - 디자이너 제공 값 추가 */
+/* semantics.css의 시맨틱 토큰에서 참조 */
+
+@theme {
+  /* Colors - neutral */
+  --color-gsgs-white: #ffffff;
+  --color-gsgs-neutral-100: #f6f6f6;
+  --color-gsgs-neutral-200: #f1f1f1;
+  --color-gsgs-neutral-300: #d2d2d2;
+  --color-gsgs-neutral-400: #8a8a8a;
+  --color-gsgs-neutral-500: #595959;
+  --color-gsgs-neutral-600: #222222;
+
+  /* Colors - blue */
+  --color-gsgs-blue-30: #f1f5ff;
+  --color-gsgs-blue-100: #d2dfff;
+  --color-gsgs-blue-250: #8fafff;
+  --color-gsgs-blue-300: #5c8aff;
+  --color-gsgs-blue-450: #2462ff;
+  --color-gsgs-blue-500: #0c51ff;
+
+  /* Spacing */
+
+  /* Typography - font-family → font-gsgs-sans */
+  --font-gsgs-sans: 'Pretendard', system-ui, sans-serif;
+
+  /* Typography - font-size → text-gsgs-* */
+  --text-gsgs-56: 3.5rem; /* 56px */
+  --text-gsgs-48: 3rem; /* 48px */
+  --text-gsgs-36: 2.25rem; /* 36px */
+  --text-gsgs-20: 1.25rem; /* 20px */
+  --text-gsgs-18: 1.125rem; /* 18px */
+  --text-gsgs-14: 0.875rem; /* 14px */
+
+  /* Typography - font-weight → font-gsgs-* */
+  --font-weight-gsgs-bold: 700;
+  --font-weight-gsgs-semibold: 600;
+  --font-weight-gsgs-medium: 500;
+  --font-weight-gsgs-regular: 400;
+
+  /* Typography - line-height → leading-gsgs-* */
+  --leading-gsgs-160: 1.6;
+  --leading-gsgs-150: 1.5;
+  --leading-gsgs-136: 1.36;
+  --leading-gsgs-125: 1.25;
+
+  /* Typography - letter-spacing → tracking-gsgs */
+  --tracking-gsgs: 0.01em;
+}

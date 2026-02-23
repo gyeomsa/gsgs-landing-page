@@ -1,0 +1,48 @@
+/* GSGS 시맨틱 토큰 + 유틸리티 */
+/* tailwind-theme의 shadcn 기본값을 var(--color-gsgs-*) 등으로 오버라이드 */
+
+:root {
+}
+
+/* 시맨틱 타이포그래피 (tokens 유틸리티 조합) */
+@layer utilities {
+  /* web-heading-1: 56px / bold / 160% */
+  .text-web-heading-1 {
+    @apply text-gsgs-56 font-gsgs-bold leading-gsgs-160 tracking-gsgs;
+  }
+
+  /* web-heading-2: 48px / semibold / 125% */
+  .text-web-heading-2 {
+    @apply text-gsgs-48 font-gsgs-semibold leading-gsgs-125 tracking-gsgs;
+  }
+
+  /* web-heading-3: 36px / semibold / 136% */
+  .text-web-heading-3 {
+    @apply text-gsgs-36 font-gsgs-semibold leading-gsgs-136 tracking-gsgs;
+  }
+
+  /* text-web-body-1: 20px / regular / 150% */
+  .text-web-body-1 {
+    @apply text-gsgs-20 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+  }
+
+  /* text-web-body-2: 18px / regular / 150% */
+  .text-web-body-2 {
+    @apply text-gsgs-18 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+  }
+
+  /* text-web-caption: 14px / regular / 125% */
+  .text-web-caption {
+    @apply text-gsgs-14 font-gsgs-regular leading-gsgs-125 tracking-gsgs;
+  }
+
+  /* text-web-cta-button: 20px / medium / 125% */
+  .text-web-cta-button {
+    @apply text-gsgs-20 font-gsgs-medium leading-gsgs-125 tracking-gsgs;
+  }
+
+  /* text-web-button: 18px / medium / 125% */
+  .text-web-button {
+    @apply text-gsgs-18 font-gsgs-medium leading-gsgs-125 tracking-gsgs;
+  }
+}
