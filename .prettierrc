@@ -13,10 +13,11 @@
 
     "importOrder": [
       "^react$",
+      "^react-dom$",
       "^(node:.*|fs|path|url|os|crypto|events|stream|http|https|zlib|util|buffer)$",
       "<THIRD_PARTY_MODULES>",
 
-      "^@/(common|components|pages)(/.*)?$",
+      "^@/(common|app|components|pages)(/.*)?$",
       "^@/(constants|models|apis|stores|providers|hooks|config|utils|lib)(/.*)?$",
       "^@/(assets|styles)(/.*)?$",
 
