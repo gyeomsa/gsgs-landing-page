@@ -1,5 +1,13 @@
 export const INTEREST_ROLES = ['배송자', '의뢰자', '둘 다'] as const;
 
+/** 폼/DB validation 글자수 제한 (Supabase 스키마와 동기화) */
+export const VALIDATION_LIMITS = {
+  name: 50,
+  email: 255,
+  departureRegion: 100,
+  arrivalRegion: 100,
+} as const;
+
 export const REGIONS = [
   '강남/서초/송파',
   '강북/도봉/노원',

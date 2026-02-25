@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldContent, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
@@ -16,8 +17,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+import { supabase } from '@/lib/supabase';
+
 import RegistrationSuccess from './RegistrationSuccess';
-import { INTEREST_ROLES, REGIONS } from './constants';
+import { INTEREST_ROLES, REGIONS, VALIDATION_LIMITS } from './constants';
 import { type RegistrationFormData, registrationSchema } from './schema';
 
 type FormFieldProps = {
@@ -64,6 +67,7 @@ function CheckboxFormField({ label, error, labelHtmlFor, children }: CheckboxFor
 
 function RegistrationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -84,9 +88,28 @@ function RegistrationForm() {
     },
   });
 
-  const onSubmit = (data: RegistrationFormData) => {
-    console.log(data);
-    setIsSubmitted(true);
+  const onSubmit = async (data: RegistrationFormData) => {
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from('preregistrations').insert({
+        name: data.name,
+        email: data.email,
+        interest_role: data.interestRole,
+        main_region: data.mainRegion,
+        departure_region: data.departureRegion || null,
+        arrival_region: data.arrivalRegion || null,
+        service_notification_consent: data.serviceNotificationConsent,
+        privacy_consent: data.privacyConsent,
+      });
+
+      if (error) throw error;
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('사전등록 실패:', error);
+      toast.error('등록에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -101,6 +124,7 @@ function RegistrationForm() {
             id="name"
             type="text"
             placeholder="이름을 입력해주세요"
+            maxLength={VALIDATION_LIMITS.name}
             aria-invalid={!!errors.name}
             {...register('name')}
           />
@@ -111,6 +135,7 @@ function RegistrationForm() {
             id="email"
             type="email"
             placeholder="이메일을 입력해주세요"
+            maxLength={VALIDATION_LIMITS.email}
             aria-invalid={!!errors.email}
             {...register('email')}
           />
@@ -170,6 +195,7 @@ function RegistrationForm() {
             id="departureRegion"
             type="text"
             placeholder="출발 지역을 입력해주세요"
+            maxLength={VALIDATION_LIMITS.departureRegion}
             aria-invalid={!!errors.departureRegion}
             {...register('departureRegion')}
           />
@@ -184,6 +210,7 @@ function RegistrationForm() {
             id="arrivalRegion"
             type="text"
             placeholder="도착 지역을 입력해주세요"
+            maxLength={VALIDATION_LIMITS.arrivalRegion}
             aria-invalid={!!errors.arrivalRegion}
             {...register('arrivalRegion')}
           />
@@ -230,9 +257,10 @@ function RegistrationForm() {
 
       <button
         type="submit"
-        className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-full rounded-md px-4 py-2 text-sm font-medium transition-colors"
+        disabled={isSubmitting}
+        className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-full rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
       >
-        제출
+        {isSubmitting ? '제출 중...' : '제출'}
       </button>
     </form>
   );
