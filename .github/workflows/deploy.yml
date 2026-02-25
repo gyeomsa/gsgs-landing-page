@@ -37,6 +37,9 @@ jobs:
 
       - name: Build
         run: pnpm run build
+        # 커스텀 도메인 사용 시 아래 env 추가:
+        # env:
+        #   VITE_BASE_PATH: "/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
