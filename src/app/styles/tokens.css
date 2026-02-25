@@ -20,17 +20,38 @@
   --color-gsgs-blue-500: #0c51ff;
 
   /* Spacing */
+  --spacing-gsgs-0: 0;
+  --spacing-gsgs-8: 0.5rem; /* 8px */
+  --spacing-gsgs-12: 0.75rem; /* 12px */
+  --spacing-gsgs-16: 1rem; /* 16px */
+  --spacing-gsgs-24: 1.5rem; /* 24px */
+  --spacing-gsgs-44: 2.75rem; /* 44px */
+  --spacing-gsgs-48: 3rem; /* 48px */
+  --spacing-gsgs-64: 4rem; /* 64px */
+  --spacing-gsgs-80: 5rem; /* 80px */
+
+  /* Breakpoints */
+  --breakpoint-mobile: 23.4375rem; /* 375px */
+  --breakpoint-desktop: 90rem; /* 1440px */
+
+  /* Radius */
+  --radius-mobile-sm: 0.5rem /* 8px */;
 
   /* Typography - font-family → font-gsgs-sans */
   --font-gsgs-sans: 'Pretendard', system-ui, sans-serif;
 
-  /* Typography - font-size → text-gsgs-* */
+  /* Typography - font-size */
   --text-gsgs-56: 3.5rem; /* 56px */
   --text-gsgs-48: 3rem; /* 48px */
   --text-gsgs-36: 2.25rem; /* 36px */
+  --text-gsgs-32: 2rem; /* 32px */
+  --text-gsgs-24: 1.5rem; /* 24px */
   --text-gsgs-20: 1.25rem; /* 20px */
   --text-gsgs-18: 1.125rem; /* 18px */
+  --text-gsgs-17: 1.0625rem; /* 17px */
   --text-gsgs-14: 0.875rem; /* 14px */
+  --text-gsgs-13: 0.8125rem; /* 13px */
+  --text-gsgs-11: 0.6875rem; /* 11px */
 
   /* Typography - font-weight → font-gsgs-* */
   --font-weight-gsgs-bold: 700;
@@ -46,4 +67,11 @@
 
   /* Typography - letter-spacing → tracking-gsgs */
   --tracking-gsgs: 0.01em;
+
+  /* GSGS semantic colors */
+  --color-semantic-text-secondary: var(--color-gsgs-neutral-400);
+  --color-semantic-text-default: var(--color-gsgs-neutral-600);
+  --color-semantic-text-brand: var(--color-gsgs-blue-500);
+  --color-semantic-text-brand-secondary: var(--color-gsgs-blue-250);
+  --color-semantic-background-surface: var(--color-gsgs-blue-250);
 }
