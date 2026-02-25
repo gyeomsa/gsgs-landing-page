@@ -9,7 +9,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-  globalIgnores(['dist', 'build', 'node_modules', '*.env', '*.env.*']),
+  globalIgnores(['dist', 'build', 'node_modules', '*.env', '*.env.*', 'src/components/ui/**']),
   {
     files: ['**/*.{ts,tsx,js,jsx,mjs,cjs}'],
     extends: [
@@ -136,6 +136,8 @@ export default defineConfig([
       'import/order': 'off',
       'import/first': 'error',
       'import/newline-after-import': ['error', { count: 1 }],
+      // === REACT HOOKS ===
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
   eslintConfigPrettier,

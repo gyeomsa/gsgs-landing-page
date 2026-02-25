@@ -1,48 +1,99 @@
-/* GSGS 시맨틱 토큰 + 유틸리티 */
-/* tailwind-theme의 shadcn 기본값을 var(--color-gsgs-*) 등으로 오버라이드 */
-
-:root {
-}
-
 /* 시맨틱 타이포그래피 (tokens 유틸리티 조합) */
 @layer utilities {
-  /* web-heading-1: 56px / bold / 160% */
-  .text-web-heading-1 {
-    @apply text-gsgs-56 font-gsgs-bold leading-gsgs-160 tracking-gsgs;
+  /* heading-1
+  * desktop : 56px / bold / 160%
+  * mobile : 32px / semibole / 136%
+  */
+  .typography-heading-1 {
+    @apply text-gsgs-32 font-gsgs-semibold leading-gsgs-136 tracking-gsgs;
+    @apply desktop:text-gsgs-56 desktop:font-gsgs-bold desktop:leading-gsgs-160;
   }
 
-  /* web-heading-2: 48px / semibold / 125% */
-  .text-web-heading-2 {
-    @apply text-gsgs-48 font-gsgs-semibold leading-gsgs-125 tracking-gsgs;
+  /* heading-2
+  * desktop : 48px / semibold / 125%
+  * mobile :
+  */
+  .typography-heading-2 {
+    @apply text-gsgs-24 font-gsgs-medium leading-gsgs-150 tracking-gsgs;
+    @apply desktop:text-gsgs-48 desktop:font-gsgs-semibold desktop:leading-gsgs-125;
   }
 
-  /* web-heading-3: 36px / semibold / 136% */
-  .text-web-heading-3 {
-    @apply text-gsgs-36 font-gsgs-semibold leading-gsgs-136 tracking-gsgs;
+  /* heading-3
+  * desktop : 36px / semibold / 136%
+  * mobile : 20px / semibold / 136%
+  */
+  .typography-heading-3 {
+    @apply text-gsgs-20 font-gsgs-semibold leading-gsgs-136 tracking-gsgs;
+    @apply desktop:text-gsgs-36;
   }
 
-  /* text-web-body-1: 20px / regular / 150% */
-  .text-web-body-1 {
-    @apply text-gsgs-20 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+  /* body-1
+  * desktop : 20px / regular / 150%
+  * mobile : 17px / medium / 150%
+  */
+  .typography-body-1 {
+    @apply text-gsgs-17 font-gsgs-medium leading-gsgs-150 tracking-gsgs;
+    @apply desktop:text-gsgs-20 desktop:font-gsgs-regular;
   }
 
-  /* text-web-body-2: 18px / regular / 150% */
-  .text-web-body-2 {
-    @apply text-gsgs-18 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+  /* body-2
+  * desktop : 18px / regular / 150%
+  * mobile : 13px / regular / 150%
+  */
+  .typography-body-2 {
+    @apply text-gsgs-13 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+    @apply desktop:text-gsgs-18;
   }
 
-  /* text-web-caption: 14px / regular / 125% */
-  .text-web-caption {
-    @apply text-gsgs-14 font-gsgs-regular leading-gsgs-125 tracking-gsgs;
+  /* caption
+  * desktop : 14px / regular / 125%
+  * mobile : 11px / regular / 150%
+  */
+  .typography-caption {
+    @apply text-gsgs-11 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+    @apply desktop:text-gsgs-14 desktop:leading-gsgs-125;
   }
 
-  /* text-web-cta-button: 20px / medium / 125% */
-  .text-web-cta-button {
-    @apply text-gsgs-20 font-gsgs-medium leading-gsgs-125 tracking-gsgs;
+  /* cta-button
+  * desktop : 20px / medium / 125%
+  * mobile : 11px / regular / 150%
+  */
+  .typography-cta-button {
+    @apply text-gsgs-11 font-gsgs-regular leading-gsgs-150 tracking-gsgs;
+    @apply desktop:text-gsgs-20 desktop:font-gsgs-medium desktop:leading-gsgs-125;
   }
 
-  /* text-web-button: 18px / medium / 125% */
-  .text-web-button {
-    @apply text-gsgs-18 font-gsgs-medium leading-gsgs-125 tracking-gsgs;
+  /* button
+  * desktop : 18px / medium / 125%
+  * mobile :
+  */
+  .typography-button {
+    @apply text-gsgs-14 font-gsgs-medium leading-gsgs-150 tracking-gsgs;
+    @apply desktop:text-gsgs-18 desktop:leading-gsgs-125;
+  }
+
+  .container-px {
+    @apply desktop:px-gsgs-24 px-gsgs-16;
+  }
+
+  /* speech-bubble - 말풍선 스타일 */
+  .speech-bubble {
+    position: relative;
+    background: #000000;
+    border-radius: 20px;
+  }
+
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 0;
+    height: 0;
+    border: 24px solid transparent;
+    border-top-color: #000000;
+    border-bottom: 0;
+    border-left: 0;
+    margin-bottom: -24px;
   }
 }
