@@ -59,7 +59,7 @@ function HeroSection() {
           </div>
           {/* 헤드라인, 설명 */}
           <div className="flex w-full">
-            <div className="desktop:gap-[28px] mb-[52px] flex w-full flex-col justify-end gap-[240px]">
+            <div className="desktop:gap-[28px] desktop:w-auto mb-[52px] flex w-full flex-col justify-end gap-[240px]">
               <div>
                 {HERO_SECTION_DATA.headline.map(headline => (
                   <p
@@ -95,7 +95,7 @@ function HeroSection() {
             'linear-gradient(180deg, var(--component-card-feature, rgba(143, 175, 255, 0.44)) 0%, rgba(255, 255, 255, 0.44) 100%)',
         }}
       >
-        <div className="gap-gsgs-8 flex flex-col items-center gap-[16px]">
+        <div className="desktop:gap-[16px] flex flex-col items-center gap-[8px]">
           <div className="gap-gsgs-12 flex">
             {/* 모바일 버튼 - h-auto로 글자 높이 반영 */}
             <Button
@@ -114,7 +114,7 @@ function HeroSection() {
           </div>
           <p className="typography-body-2 text-semantic-text-secondary">{subText}</p>
         </div>
-        <div className="desktop:flex-row desktop:max-w-[948px] flex w-full max-w-2/5 flex-col justify-center gap-[24px]">
+        <div className="desktop:flex-row desktop:max-w-[948px] flex w-full max-w-2/5 min-w-[230px] flex-col justify-center gap-[24px]">
           <FeatureSection>
             오토바이 기반 배송 대비 <br /> 탄소 <span>70%</span> 절감
           </FeatureSection>
