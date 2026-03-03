@@ -42,7 +42,17 @@ function HeroSection() {
   const { text, subText, desktopHref, mobileHref } = HERO_SECTION_DATA.cta;
 
   const trackCtaClick = (location: string, device: string) => {
-    event('cta_click', { location, device });
+    const labels: Record<string, Record<string, string>> = {
+      hero: {
+        mobile: '히어로 섹션 사전등록 버튼 (모바일)',
+        desktop: '히어로 섹션 사전등록 버튼 (데스크탑)',
+      },
+    };
+    event('cta_click', {
+      location,
+      device,
+      event_label: labels[location]?.[device] ?? `사전등록 버튼 (${device})`,
+    });
   };
 
   return (

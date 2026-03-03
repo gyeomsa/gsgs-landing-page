@@ -71,7 +71,15 @@ function ProcessSection() {
         value={activeTab}
         onValueChange={v => {
           setActiveTab(v as TabValue);
-          event('tab_switch', { tab: v, section: 'process' });
+          const tabLabels: Record<string, string> = {
+            배달자: '이용방법 탭 - 배달자',
+            의뢰인: '이용방법 탭 - 의뢰인',
+          };
+          event('tab_switch', {
+            tab: v,
+            section: 'process',
+            event_label: tabLabels[v] ?? `이용방법 탭 - ${v}`,
+          });
         }}
         className="flex w-full max-w-[950px] flex-col items-center"
       >
