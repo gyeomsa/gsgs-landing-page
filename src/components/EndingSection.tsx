@@ -1,6 +1,8 @@
 import { Link } from 'react-router';
+import { toast } from 'sonner';
 
 import { event } from '@/lib/analytics';
+import { copyToClipboard } from '@/lib/utils';
 
 import endingImg from '@/assets/ending/ending_img.png';
 import logoBrand from '@/assets/logo/logo_brand.svg';
@@ -18,17 +20,26 @@ function EndingSection() {
       try {
         await navigator.share(shareData);
         event('share', { method: 'native', location: 'ending' });
+        toast.success('공유되었습니다');
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
-          await navigator.clipboard.writeText(url);
-          event('share', { method: 'clipboard', location: 'ending' });
-          alert('링크가 클립보드에 복사되었습니다.');
+          const ok = await copyToClipboard(url);
+          if (ok) {
+            event('share', { method: 'clipboard', location: 'ending' });
+            toast.success('링크가 클립보드에 복사되었습니다');
+          } else {
+            toast.error('링크 복사에 실패했습니다');
+          }
         }
       }
     } else {
-      await navigator.clipboard.writeText(url);
-      event('share', { method: 'clipboard', location: 'ending' });
-      alert('링크가 클립보드에 복사되었습니다.');
+      const ok = await copyToClipboard(url);
+      if (ok) {
+        event('share', { method: 'clipboard', location: 'ending' });
+        toast.success('링크가 클립보드에 복사되었습니다');
+      } else {
+        toast.error('링크 복사에 실패했습니다');
+      }
     }
   };
 

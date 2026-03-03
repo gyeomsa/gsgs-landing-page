@@ -1,10 +1,14 @@
 import { Link } from 'react-router';
+import { toast } from 'sonner';
+
+import { event } from '@/lib/analytics';
+import { copyToClipboard } from '@/lib/utils';
 
 import characterImg from '@/assets/ending/character2.png';
 
 function RegistrationSuccess() {
   const handleShare = async () => {
-    const url = window.location.origin + window.location.pathname;
+    const url = `${window.location.origin}${window.location.pathname}`;
     const shareData = {
       title: '겸사겸사 사전등록',
       text: '겸사겸사 사전 등록하고, 등하굣길 시간에 수익을 만들어보세요!',
@@ -14,15 +18,27 @@ function RegistrationSuccess() {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
+        event('share', { method: 'native', location: 'registration_success' });
+        toast.success('공유되었습니다');
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
-          await navigator.clipboard.writeText(url);
-          alert('링크가 클립보드에 복사되었습니다.');
+          const ok = await copyToClipboard(url);
+          if (ok) {
+            event('share', { method: 'clipboard', location: 'registration_success' });
+            toast.success('링크가 클립보드에 복사되었습니다');
+          } else {
+            toast.error('링크 복사에 실패했습니다');
+          }
         }
       }
     } else {
-      await navigator.clipboard.writeText(url);
-      alert('링크가 클립보드에 복사되었습니다.');
+      const ok = await copyToClipboard(url);
+      if (ok) {
+        event('share', { method: 'clipboard', location: 'registration_success' });
+        toast.success('링크가 클립보드에 복사되었습니다');
+      } else {
+        toast.error('링크 복사에 실패했습니다');
+      }
     }
   };
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { toast } from 'sonner';
 
 import { event } from '@/lib/analytics';
+import { copyToClipboard } from '@/lib/utils';
 
 function FloatingActionButtons() {
   const [showTopButton, setShowTopButton] = useState(false);
@@ -27,21 +28,6 @@ function FloatingActionButtons() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success('링크가 클립보드에 복사되었습니다');
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      toast.success('링크가 클립보드에 복사되었습니다');
-    }
-  };
-
   const handleShare = async () => {
     const shareData = {
       title: '겸사겸사 - 일상의 이동을 가치 있게',
@@ -56,13 +42,23 @@ function FloatingActionButtons() {
         toast.success('공유되었습니다');
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
-          await copyToClipboard(window.location.href);
-          event('share', { method: 'clipboard', location: 'floating' });
+          const ok = await copyToClipboard(window.location.href);
+          if (ok) {
+            event('share', { method: 'clipboard', location: 'floating' });
+            toast.success('링크가 클립보드에 복사되었습니다');
+          } else {
+            toast.error('링크 복사에 실패했습니다');
+          }
         }
       }
     } else {
-      await copyToClipboard(window.location.href);
-      event('share', { method: 'clipboard', location: 'floating' });
+      const ok = await copyToClipboard(window.location.href);
+      if (ok) {
+        event('share', { method: 'clipboard', location: 'floating' });
+        toast.success('링크가 클립보드에 복사되었습니다');
+      } else {
+        toast.error('링크 복사에 실패했습니다');
+      }
     }
   };
 
