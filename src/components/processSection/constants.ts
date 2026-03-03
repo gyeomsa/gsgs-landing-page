@@ -21,7 +21,7 @@ export const TAB_CONTENTS: Record<(typeof TAB_VALUES)[keyof typeof TAB_VALUES], 
       image: delivery01,
       title: '루틴 등록',
       description:
-        '출퇴근 경로와 시간대를 한번만 등록하세요\n매일 같은 길을 가는 것만으로도 준비 완료!',
+        '출퇴근 경로와 시간대를 한 번만 등록하세요.\n매일 같은 길을 가는 것만으로도 준비 완료!',
     },
     {
       image: delivery02,
@@ -33,18 +33,18 @@ export const TAB_CONTENTS: Record<(typeof TAB_VALUES)[keyof typeof TAB_VALUES], 
       image: delivery03,
       title: '가는 길에 픽업 / 전달',
       description:
-        '평소처럼 출퇴근하면서 물품을 픽업하고 목적지에서 전달.\n사진으로 간편하게 인증합니다.',
+        '평소처럼 출퇴근하면서 물품을 픽업하고 목적지에서 물품을 전달합니다.\n사진으로 간편하게 인증합니다.',
     },
     {
       image: delivery04,
       title: '정산',
-      description: '배송 완료 즉시 포인트 적립.\n원하는 시점에 계좌로 출금하세요.',
+      description: '배송 완료 즉시 포인트가 적립됩니다.\n원하는 시점에 계좌로 출금하세요.',
     },
   ],
   [TAB_VALUES.REQUESTER]: [
     {
       image: request01,
-      title: '출발·도착·시간 입력',
+      title: '출발·도착 시간 입력',
       description: '지도에서 출발지와 도착지를 선택하고,\n희망하는 수령 시간을 입력하세요.',
     },
     {

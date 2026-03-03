@@ -6,86 +6,54 @@ export type ProcessItem = {
   description: string;
 };
 
-function StepTitle({
-  stepNumber,
-  title,
-  className,
-}: {
-  stepNumber: string;
-  title: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        'gap-gsgs-14 typography-heading-3 text-semantic-text-brand flex flex-col',
-        className
-      )}
-    >
-      <h3>{stepNumber}</h3>
-      <h3>{title}</h3>
-    </div>
-  );
-}
-
-function StepDescription({ value, className }: { value: string; className?: string }) {
-  return (
-    <p
-      className={cn(
-        'typography-body-1 text-semantic-text-secondary whitespace-pre-line',
-        className
-      )}
-    >
-      {value}
-    </p>
-  );
-}
-
 type ProcessStepCardProps = {
   item: ProcessItem;
   index: number;
+  /** 데스크탑에서 이미지 위치 - true면 오른쪽 (의뢰인 교차 레이아웃) */
+  isImageRight?: boolean;
 };
 
-function ProcessStepCard({ item, index }: ProcessStepCardProps) {
+function ProcessStepCard({ item, index, isImageRight = false }: ProcessStepCardProps) {
   const stepNumber = String(index + 1).padStart(2, '0');
-  const isReversed = index % 2 === 1;
 
   return (
     <div
       className={cn(
-        'gap-gsgs-16 grid',
-        // Mobile: 3행 (StepTitle → Image → StepDescription)
-        'grid-cols-1 grid-rows-[auto_auto_auto]',
-        // Desktop: 2열, Image | (StepTitle + StepDescription)
-        'desktop:grid-cols-2 desktop:grid-rows-[auto_1fr] desktop:gap-x-gsgs-48 desktop:gap-y-gsgs-0 desktop:rounded-lg desktop:p-gsgs-24 desktop:max-w-[975px]'
+        'desktop:flex-row desktop:items-center desktop:gap-12 flex flex-col gap-6',
+        // 배달자/의뢰인 01,03: 이미지 왼쪽, 텍스트 오른쪽 → flex-row-reverse
+        // 의뢰인 02: 이미지 오른쪽, 텍스트 왼쪽 → flex-row
+        !isImageRight && 'desktop:flex-row-reverse'
       )}
     >
-      <StepTitle
-        stepNumber={stepNumber}
-        title={item.title}
-        className={cn(
-          'desktop:col-start-2 desktop:row-start-1 desktop:mb-gsgs-44',
-          isReversed && 'desktop:col-start-1'
-        )}
-      />
-
+      {/* 텍스트 영역 */}
       <div
         className={cn(
-          'min-w-0',
-          'desktop:col-start-1 desktop:row-span-2 desktop:row-start-1',
-          isReversed && 'desktop:col-start-2'
+          'flex flex-1 flex-col gap-4',
+          isImageRight && 'desktop:items-end desktop:text-right'
         )}
       >
-        <img src={item.image} alt={item.title} className="w-full rounded-lg object-cover" />
+        <div className={cn('flex flex-col gap-1', isImageRight && 'desktop:items-end')}>
+          <h3 className="typography-heading-3 font-gsgs-semibold text-[#0C51FF]">{stepNumber}</h3>
+          <h3 className="typography-heading-3 font-gsgs-semibold text-[#0F172A]">{item.title}</h3>
+        </div>
+        <p
+          className={cn(
+            'typography-body-2 text-gsgs-neutral-600 whitespace-pre-line',
+            isImageRight && 'desktop:max-w-[400px] desktop:text-right'
+          )}
+        >
+          {item.description}
+        </p>
       </div>
 
-      <StepDescription
-        value={item.description}
-        className={cn(
-          'desktop:col-start-2 desktop:row-start-2',
-          isReversed && 'desktop:col-start-1'
-        )}
-      />
+      {/* 폰 이미지 */}
+      <div className="flex shrink-0 justify-center">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="desktop:max-h-[320px] max-h-[280px] w-auto rounded-xl border-0 object-contain"
+        />
+      </div>
     </div>
   );
 }

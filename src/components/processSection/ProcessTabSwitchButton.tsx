@@ -2,7 +2,7 @@ import { TAB_VALUES, type TabValue } from './constants';
 
 const OTHER_TAB_LABEL: Record<TabValue, string> = {
   [TAB_VALUES.DELIVERY]: '의뢰인 프로세스 보기',
-  [TAB_VALUES.REQUESTER]: '배송자 프로세스 보기',
+  [TAB_VALUES.REQUESTER]: '배달자 프로세스 보기',
 };
 
 type ProcessTabSwitchButtonProps = {
@@ -24,11 +24,17 @@ function ProcessTabSwitchButton({
     sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const isDelivery = activeTab === TAB_VALUES.DELIVERY;
+
   return (
     <button
       type="button"
       onClick={handleSwitch}
-      className="typography-cta-button text-semantic-text-brand hover:underline"
+      className={
+        isDelivery
+          ? 'typography-cta-button desktop:px-10 desktop:py-4 rounded-full bg-[#0C51FF] px-8 py-3 text-white transition-opacity hover:opacity-90'
+          : 'typography-cta-button desktop:px-10 desktop:py-4 rounded-full border-2 border-[#0C51FF] bg-transparent px-8 py-3 text-[#0C51FF] transition-colors hover:bg-[#0C51FF]/5'
+      }
     >
       {OTHER_TAB_LABEL[activeTab]}
     </button>
