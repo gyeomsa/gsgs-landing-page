@@ -9,4 +9,4 @@ Allow: /
 # Disallow: /private/
 
 # 사이트맵 위치 명시 (도메인 주소로 수정하세요)
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://landing.gyeomsa.cloud/sitemap.xml
