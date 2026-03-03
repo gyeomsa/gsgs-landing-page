@@ -60,6 +60,7 @@ function ProcessSection() {
 
   return (
     <section
+      id="process"
       ref={sectionRef}
       className="container-px desktop:py-24 flex flex-col items-center bg-white py-16"
     >

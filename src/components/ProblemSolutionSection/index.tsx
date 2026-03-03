@@ -28,7 +28,7 @@ const SECTION_DATA = {
 
 function ProblemSolutionSection() {
   return (
-    <section className="flex w-full flex-col bg-white">
+    <section id="problem" className="flex w-full flex-col bg-white">
       {/* 1. 타이틀 (흰색 배경) */}
       <div className="container-px desktop:py-16 mx-auto w-full max-w-[950px] py-10">
         <h2 className="typography-heading-2 font-gsgs-bold whitespace-pre-line text-[#0F172A]">

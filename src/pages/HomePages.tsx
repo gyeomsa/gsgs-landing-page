@@ -1,5 +1,6 @@
 import BenefitSection from '@/components/BenefitSection';
 import EndingSection from '@/components/EndingSection';
+import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import ProblemSolutionSection from '@/components/ProblemSolutionSection';
 import PilotTestResultSection from '@/components/pilotTestResultSection';
@@ -19,6 +20,7 @@ function HomePages() {
         <PreregistrationSection />
       </div>
       <EndingSection />
+      <Footer />
       <FloatingActionButtons />
     </div>
   );
