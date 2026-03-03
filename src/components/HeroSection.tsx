@@ -41,7 +41,35 @@ function HeroSection() {
 
   return (
     <>
-      <section className="container-px flex max-h-[706px] justify-between">
+      {/* 모바일 사이즈 히어로 섹션 */}
+      <section className="desktop:hidden mx-auto flex max-w-[600px] flex-col justify-center px-[40px]">
+        {/* 태그라인, 브랜드 아이콘 */}
+        <div className="mt-[60px] flex flex-col gap-[8px]">
+          <p className="typography-body-1 text-semantic-text-brand">{HERO_SECTION_DATA.tagline}</p>
+          <div className="desktop:w-[425px] w-[192px]">
+            <img
+              src={HERO_SECTION_DATA.brandIcon}
+              alt="brand-icon"
+              className="h-full w-full object-contain"
+            />
+          </div>
+        </div>
+        {/* 모바일 히어로 이미지 */}
+        <div className="mb-[38px]">
+          <img src={mobileHero} alt="mobile-hero" className="w-full object-contain" />
+        </div>
+        {/* 설명, 사전 등록 버튼 */}
+        <div className="flex flex-col gap-[24px]">
+          <p className="typography-body-2 text-semantic-text-secondary mb-[16px] text-center whitespace-pre-line">
+            {HERO_SECTION_DATA.description}
+          </p>
+          <Button className="typography-button hover:bg-gsgs-neutral-100 h-auto min-h-0 rounded-[20px] bg-white px-[70px] py-[20px] text-[#222] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
+            {HERO_SECTION_DATA.cta.text}
+          </Button>
+          <p>{HERO_SECTION_DATA.cta.subText}</p>
+        </div>
+      </section>
+      <section className="container-px desktop:max-w-[1440px] desktop:max-h-[706px] mx-auto flex max-w-[700px] justify-between">
         <div className="desktop:gap-[140px] flex w-full flex-col gap-[44px]">
           {/* 아이콘 */}
           <div className="desktop:gap-[24px] flex flex-col gap-[14px] pt-[60px]">
