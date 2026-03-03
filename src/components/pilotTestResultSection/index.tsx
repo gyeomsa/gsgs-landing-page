@@ -68,7 +68,7 @@ function PilotTestResultSection() {
         <div className="desktop:px-8 desktop:py-6 relative overflow-visible rounded-2xl bg-white px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
           {/* 말풍선 꼬리 (좌측 하단) */}
           <div
-            className="absolute bottom-[20%] -left-3 size-0 border-y-[10px] border-r-[14px] border-l-0 border-solid border-y-transparent border-r-white"
+            className="absolute bottom-[20%] -left-3 size-0 border-y-10 border-r-14 border-l-0 border-solid border-y-transparent border-r-white"
             aria-hidden
           />
           <p className="typography-body-2 text-gsgs-neutral-600 text-center whitespace-pre-line">
