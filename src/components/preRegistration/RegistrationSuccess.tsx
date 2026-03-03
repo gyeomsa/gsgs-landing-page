@@ -18,13 +18,21 @@ function RegistrationSuccess() {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
-        event('share', { method: 'native', location: 'registration_success' });
+        event('share', {
+          method: 'native',
+          location: 'registration_success',
+          event_label: '사전등록 완료 화면 - 네이티브 공유',
+        });
         toast.success('공유되었습니다');
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
           const ok = await copyToClipboard(url);
           if (ok) {
-            event('share', { method: 'clipboard', location: 'registration_success' });
+            event('share', {
+              method: 'clipboard',
+              location: 'registration_success',
+              event_label: '사전등록 완료 화면 - 클립보드 복사',
+            });
             toast.success('링크가 클립보드에 복사되었습니다');
           } else {
             toast.error('링크 복사에 실패했습니다');
@@ -34,7 +42,11 @@ function RegistrationSuccess() {
     } else {
       const ok = await copyToClipboard(url);
       if (ok) {
-        event('share', { method: 'clipboard', location: 'registration_success' });
+        event('share', {
+          method: 'clipboard',
+          location: 'registration_success',
+          event_label: '사전등록 완료 화면 - 클립보드 복사',
+        });
         toast.success('링크가 클립보드에 복사되었습니다');
       } else {
         toast.error('링크 복사에 실패했습니다');

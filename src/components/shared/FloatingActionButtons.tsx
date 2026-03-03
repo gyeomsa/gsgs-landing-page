@@ -38,13 +38,21 @@ function FloatingActionButtons() {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
-        event('share', { method: 'native', location: 'floating' });
+        event('share', {
+          method: 'native',
+          location: 'floating',
+          event_label: '플로팅 버튼 - 네이티브 공유',
+        });
         toast.success('공유되었습니다');
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
           const ok = await copyToClipboard(window.location.href);
           if (ok) {
-            event('share', { method: 'clipboard', location: 'floating' });
+            event('share', {
+              method: 'clipboard',
+              location: 'floating',
+              event_label: '플로팅 버튼 - 클립보드 복사',
+            });
             toast.success('링크가 클립보드에 복사되었습니다');
           } else {
             toast.error('링크 복사에 실패했습니다');
@@ -54,7 +62,11 @@ function FloatingActionButtons() {
     } else {
       const ok = await copyToClipboard(window.location.href);
       if (ok) {
-        event('share', { method: 'clipboard', location: 'floating' });
+        event('share', {
+          method: 'clipboard',
+          location: 'floating',
+          event_label: '플로팅 버튼 - 클립보드 복사',
+        });
         toast.success('링크가 클립보드에 복사되었습니다');
       } else {
         toast.error('링크 복사에 실패했습니다');
@@ -84,14 +96,24 @@ function FloatingActionButtons() {
         to="/preregistration"
         className={`${buttonBaseClass} desktop:hidden`}
         aria-label="사전 등록"
-        onClick={() => event('cta_click', { location: 'floating', device: 'mobile' })}
+        onClick={() =>
+          event('cta_click', {
+            location: 'floating',
+            device: 'mobile',
+            event_label: '플로팅 버튼 사전등록 (모바일)',
+          })
+        }
       >
         <UserPlusIcon className="size-5" />
       </Link>
       <button
         type="button"
         onClick={() => {
-          event('cta_click', { location: 'floating', device: 'desktop' });
+          event('cta_click', {
+            location: 'floating',
+            device: 'desktop',
+            event_label: '플로팅 버튼 사전등록 (데스크탑)',
+          });
           scrollToRegisterSection();
         }}
         className={`${buttonBaseClass} desktop:flex hidden`}
