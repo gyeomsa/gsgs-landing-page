@@ -16,11 +16,11 @@ const SECTION_DATA = {
   ],
   bubbles: [
     {
-      text: '겸사겸사는 그 낭비를 수익으로, 그 필요를 저렴한 배송으로 바꿉니다.',
+      text: '겸사겸사는 그 낭비를 수익으로,\n그 필요를 저렴한 배송으로 바꿉니다.',
       align: 'left' as const,
     },
     {
-      text: '그냥 지나가던 길을 돈이 되는 동선으로 바꿉니다.',
+      text: '그냥 지나가던 길을\n돈이 되는 동선으로 바꿉니다.',
       align: 'right' as const,
     },
   ],
@@ -76,16 +76,16 @@ function ProblemSolutionSection() {
         </div>
       </div>
 
-      {/* 3. 말풍선 영역 (연한 파란 배경) - 모바일: 세로 배치 / 데스크탑: 좌우 staggered */}
-      <div className="desktop:py-20 w-full bg-[#D7E3FF] py-12">
-        <div className="container-px desktop:flex-row desktop:items-stretch desktop:justify-between desktop:gap-8 desktop:px-16 mx-auto flex w-full max-w-[950px] flex-col gap-6">
+      {/* 3. 말풍선 영역 (연한 파란 배경) - 수익: 위, 동선: 아래, 위아래로 분리 */}
+      <div className="desktop:min-h-[420px] desktop:py-24 w-full bg-[#D7E3FF] py-12">
+        <div className="container-px desktop:flex-col desktop:justify-between desktop:gap-12 desktop:px-16 mx-auto flex w-full max-w-[950px] flex-col gap-6">
           {SECTION_DATA.bubbles.map((bubble, i) => (
             <div
               key={i}
               className={cn(
-                'desktop:px-8 desktop:py-6 rounded-2xl bg-white px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.06)]',
-                i === 0 ? 'desktop:w-[48%] desktop:self-start' : 'desktop:w-[48%] desktop:self-end',
-                bubble.align === 'left' ? 'text-left' : 'desktop:text-center text-right'
+                'desktop:px-8 desktop:py-6 desktop:max-w-[48%] w-fit max-w-[340px] rounded-2xl bg-white px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.06)]',
+                i === 0 ? 'self-start' : 'self-end',
+                bubble.align === 'left' ? 'text-left' : 'desktop:text-right text-right'
               )}
             >
               <p className="typography-body-2 whitespace-pre-line text-[#0F172A]">{bubble.text}</p>
