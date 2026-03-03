@@ -12,9 +12,11 @@ function init() {
   if (window.gtag) return;
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer.push(args);
+  /* eslint-disable prefer-rest-params -- gtag.js expects arguments object format */
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments);
   };
+  /* eslint-enable prefer-rest-params */
 
   const script = document.createElement('script');
   script.async = true;
