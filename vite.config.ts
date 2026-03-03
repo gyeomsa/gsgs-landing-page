@@ -18,7 +18,7 @@ export default defineConfig({
     }),
     tailwindcss(),
     Sitemap({
-      hostname: 'https://gyeomsa.github.io/gsgs-landing-page',
+      hostname: 'https://landing.gyeomsa.cloud',
       dynamicRoutes: ['/preregistration'],
     }),
   ],

@@ -40,9 +40,7 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-        # 커스텀 도메인 사용 시 아래 env 추가:
-        # env:
-        #   VITE_BASE_PATH: "/"
+          VITE_BASE_PATH: "/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
