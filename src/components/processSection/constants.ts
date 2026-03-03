@@ -2,6 +2,9 @@ import delivery01 from '@/assets/process/delivery01.png';
 import delivery02 from '@/assets/process/delivery02.png';
 import delivery03 from '@/assets/process/delivery03.png';
 import delivery04 from '@/assets/process/delivery04.png';
+import request01 from '@/assets/process/request01.png';
+import request02 from '@/assets/process/request02.png';
+import request03 from '@/assets/process/request03.png';
 
 import type { ProcessItem } from './ProcessStepCard';
 
@@ -40,18 +43,18 @@ export const TAB_CONTENTS: Record<(typeof TAB_VALUES)[keyof typeof TAB_VALUES], 
   ],
   [TAB_VALUES.REQUESTER]: [
     {
-      image: delivery01, // TODO: requester01.png로 교체
+      image: request01,
       title: '출발·도착·시간 입력',
       description: '지도에서 출발지와 도착지를 선택하고,\n희망하는 수령 시간을 입력하세요.',
     },
     {
-      image: delivery01, // TODO: requester02.png로 교체
+      image: request02,
       title: '이동 중인 배송자와 매칭',
       description:
         '시스템이 자동으로 조건에 맞는 배송자를 찾아 연결해드립니다.\n10분 내 매칭 완료!',
     },
     {
-      image: delivery01, // TODO: requester03.png로 교체
+      image: request03,
       title: '사진 인증 후 완료',
       description:
         '픽업과 전달 단계에서 사진으로 배송 상태를 확인할 수 있습니다.\n안전하고 투명한 배송 과정!',

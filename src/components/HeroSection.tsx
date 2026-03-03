@@ -5,15 +5,14 @@ import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 
 import brandIcon from '@/assets/hero/brand-icon.png';
-import character from '@/assets/hero/character01.png';
-import desktopHero from '@/assets/hero/desktop-hero.png';
+import desktopHero from '@/assets/hero/desktop-hero-set.png';
+import mobileHero from '@/assets/hero/mobile-hero-set.png';
 
 const HERO_SECTION_DATA = {
   tagline: '일상의 이동을 가치 있게',
   brandIcon: brandIcon,
   headline: ['매일 반복되는 그 길이', '수익이 되는 순간'],
   description: '출퇴근·등하굣길을 활용한\n초저비용 배송 플랫폼',
-  character: character,
   cta: {
     text: '사전등록하고 얼리버드 혜택 받기',
     subText: '배송인, 의뢰인 모두 사전등록 가능',
@@ -74,18 +73,20 @@ function HeroSection() {
                 {HERO_SECTION_DATA.description}
               </p>
             </div>
-            <div className="desktop:block hidden w-[260px]">
-              <img
-                src={HERO_SECTION_DATA.character}
-                alt="character"
-                className="h-full w-full object-contain"
-              />
-            </div>
           </div>
         </div>
         {/* 폰 이미지 - 아래 section 위로 겹침 */}
-        <div className="desktop:block desktop:-mb-[80px] relative z-10 hidden max-w-[740px]">
-          <img src={desktopHero} alt="desktop-hero" />
+        <div className="desktop:block desktop:-mb-[80px] relative z-10 max-w-[740px]">
+          <img
+            src={desktopHero}
+            alt="desktop-hero"
+            className="desktop:block hidden w-full object-contain"
+          />
+          <img
+            src={mobileHero}
+            alt="mobile-hero"
+            className="desktop:hidden w-full object-contain"
+          />
         </div>
       </section>
       <section

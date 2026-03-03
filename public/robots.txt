@@ -1,0 +1,12 @@
+# 모든 검색 엔진 크롤러에 대해
+User-agent: *
+
+# 모든 페이지 수집 허용 (차단하고 싶은 경로가 있다면 Disallow 사용)
+Allow: /
+
+# 관리자 페이지나 개인정보 페이지는 제외하고 싶을 때 (예시)
+# Disallow: /admin/
+# Disallow: /private/
+
+# 사이트맵 위치 명시 (도메인 주소로 수정하세요)
+Sitemap: https://your-domain.com/sitemap.xml
