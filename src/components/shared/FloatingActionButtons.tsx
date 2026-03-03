@@ -4,6 +4,8 @@ import { ArrowUpIcon, Share2Icon, UserPlusIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { toast } from 'sonner';
 
+import { event } from '@/lib/analytics';
+
 function FloatingActionButtons() {
   const [showTopButton, setShowTopButton] = useState(false);
 
@@ -50,14 +52,17 @@ function FloatingActionButtons() {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
+        event('share', { method: 'native', location: 'floating' });
         toast.success('공유되었습니다');
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
           await copyToClipboard(window.location.href);
+          event('share', { method: 'clipboard', location: 'floating' });
         }
       }
     } else {
       await copyToClipboard(window.location.href);
+      event('share', { method: 'clipboard' });
     }
   };
 
@@ -83,12 +88,16 @@ function FloatingActionButtons() {
         to="/preregistration"
         className={`${buttonBaseClass} desktop:hidden`}
         aria-label="사전 등록"
+        onClick={() => event('cta_click', { location: 'floating', device: 'mobile' })}
       >
         <UserPlusIcon className="size-5" />
       </Link>
       <button
         type="button"
-        onClick={scrollToRegisterSection}
+        onClick={() => {
+          event('cta_click', { location: 'floating', device: 'desktop' });
+          scrollToRegisterSection();
+        }}
         className={`${buttonBaseClass} desktop:flex hidden`}
         aria-label="사전 등록"
       >
