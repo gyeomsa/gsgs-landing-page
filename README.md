@@ -32,6 +32,24 @@ src/
 - **Husky** - Git 훅
 - **lint-staged** - 커밋 전 자동 린트/포맷 적용
 
+## 환경 변수
+
+`.env` 파일을 `.env.example`을 참고하여 생성합니다.
+
+| 변수                     | 설명                                            |
+| ------------------------ | ----------------------------------------------- |
+| `VITE_SUPABASE_URL`      | Supabase 프로젝트 URL                           |
+| `VITE_SUPABASE_ANON_KEY` | Supabase 익명 키                                |
+| `VITE_GA_ID`             | Google Analytics 4 측정 ID (예: `G-XXXXXXXXXX`) |
+
+## Google Analytics
+
+GA4를 통한 사용자 행동 트래킹이 적용되어 있습니다.
+
+- **설정**: `.env`에 `VITE_GA_ID` 설정
+- **수집 이벤트**: CTA 클릭, 공유, 사전등록 완료/실패, 탭 전환 등
+- **상세 문서**: [docs/analytics.md](./docs/analytics.md)
+
 ## 시작하기
 
 ```bash

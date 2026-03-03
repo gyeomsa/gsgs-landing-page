@@ -1,5 +1,7 @@
 import { Link } from 'react-router';
 
+import { event } from '@/lib/analytics';
+
 import endingImg from '@/assets/ending/ending_img.png';
 import logoBrand from '@/assets/logo/logo_brand.svg';
 
@@ -15,16 +17,23 @@ function EndingSection() {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
+        event('share', { method: 'native', location: 'ending' });
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
           await navigator.clipboard.writeText(url);
+          event('share', { method: 'clipboard', location: 'ending' });
           alert('링크가 클립보드에 복사되었습니다.');
         }
       }
     } else {
       await navigator.clipboard.writeText(url);
+      event('share', { method: 'clipboard', location: 'ending' });
       alert('링크가 클립보드에 복사되었습니다.');
     }
+  };
+
+  const trackCtaClick = (location: string, device: string) => {
+    event('cta_click', { location, device });
   };
 
   const ctaButtons = (
@@ -32,12 +41,14 @@ function EndingSection() {
       <a
         href="#register"
         className="typography-cta-button desktop:flex hidden min-h-[48px] max-w-[280px] min-w-[200px] flex-none items-center justify-center rounded-md border border-[#CBD5E1] bg-white px-6 py-3 text-[#0F172A] transition-colors hover:bg-[#F6F6F6]"
+        onClick={() => trackCtaClick('ending', 'desktop')}
       >
         사전등록하기
       </a>
       <Link
         to="/preregistration"
         className="typography-cta-button desktop:hidden desktop:flex-none desktop:min-w-[200px] desktop:max-w-[280px] flex min-h-[48px] max-w-[260px] flex-1 items-center justify-center rounded-md border border-[#CBD5E1] bg-white px-6 py-3 text-[#0F172A] transition-colors hover:bg-[#F6F6F6]"
+        onClick={() => trackCtaClick('ending', 'mobile')}
       >
         사전등록하기
       </Link>
