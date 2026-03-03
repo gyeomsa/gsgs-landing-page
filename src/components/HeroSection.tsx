@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 
-import { Link } from 'react-router';
-
 import { Button } from '@/components/ui/button';
 
 import brandIcon from '@/assets/hero/brand-icon.png';
@@ -37,7 +35,7 @@ function FeatureSection({ children }: { children: ReactNode }) {
 }
 
 function HeroSection() {
-  const { text, subText, desktopHref, mobileHref } = HERO_SECTION_DATA.cta;
+  const { text, subText, desktopHref } = HERO_SECTION_DATA.cta;
 
   return (
     <>
@@ -63,13 +61,16 @@ function HeroSection() {
           <p className="typography-body-2 text-semantic-text-secondary mb-[16px] text-center whitespace-pre-line">
             {HERO_SECTION_DATA.description}
           </p>
-          <Button className="typography-button hover:bg-gsgs-neutral-100 h-auto min-h-0 rounded-[20px] bg-white px-[70px] py-[20px] text-[#222] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
+          <Button className="typography-button hover:bg-gsgs-neutral-100 h-auto min-h-0 w-full max-w-[320px] self-center rounded-[20px] bg-white px-[70px] py-[20px] text-[#222] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
             {HERO_SECTION_DATA.cta.text}
           </Button>
-          <p>{HERO_SECTION_DATA.cta.subText}</p>
+          <p className="typography-body-2 text-semantic-text-secondary px-6 text-center">
+            {HERO_SECTION_DATA.cta.subText}
+          </p>
         </div>
       </section>
-      <section className="container-px desktop:max-w-[1440px] desktop:max-h-[706px] mx-auto flex max-w-[700px] justify-between">
+      {/* 데스크탑 전용 히어로 섹션 */}
+      <section className="container-px desktop:max-w-[1440px] desktop:max-h-[706px] desktop:flex mx-auto hidden max-w-[700px] justify-between">
         <div className="desktop:gap-[140px] flex w-full flex-col gap-[44px]">
           {/* 아이콘 */}
           <div className="desktop:gap-[24px] flex flex-col gap-[14px] pt-[60px]">
@@ -103,44 +104,19 @@ function HeroSection() {
             </div>
           </div>
         </div>
-        {/* 폰 이미지 - 아래 section 위로 겹침 */}
-        <div className="desktop:block desktop:-mb-[80px] relative z-10 max-w-[740px]">
-          <img
-            src={desktopHero}
-            alt="desktop-hero"
-            className="desktop:block hidden w-full object-contain"
-          />
-          <img
-            src={mobileHero}
-            alt="mobile-hero"
-            className="desktop:hidden w-full object-contain"
-          />
+        {/* 폰 이미지 - 아래 section 위로 겹침 (데스크탑 전용) */}
+        <div className="desktop:-mb-[80px] desktop:-mt-[80px] relative z-10 max-w-[740px]">
+          <img src={desktopHero} alt="desktop-hero" className="w-full object-contain" />
         </div>
       </section>
-      <section
-        className="desktop:gap-[124px] desktop:rounded-t-[120px] flex flex-col items-center gap-[100px] pt-[32px] pb-[66px]"
-        style={{
-          background:
-            'linear-gradient(180deg, var(--component-card-feature, rgba(143, 175, 255, 0.44)) 0%, rgba(255, 255, 255, 0.44) 100%)',
-        }}
-      >
-        <div className="desktop:gap-[16px] flex flex-col items-center gap-[8px]">
-          <div className="gap-gsgs-12 flex">
-            {/* 모바일 버튼 - h-auto로 글자 높이 반영 */}
-            <Button
-              asChild
-              className="typography-cta-button desktop:hidden h-auto min-h-0 px-[1.5em] py-[0.75em]"
-            >
-              <Link to={mobileHref}>{text}</Link>
-            </Button>
-            {/* 데스크탑 버튼 - h-auto로 글자 높이 반영 */}
-            <Button
-              asChild
-              className="typography-cta-button desktop:inline-flex text-semantic-text-default hover:bg-gsgs-neutral-100 hidden h-auto min-h-0 min-w-[388px] rounded-[30px] bg-white px-[1.5em] py-[1.2em] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
-            >
-              <a href={desktopHref}>{text}</a>
-            </Button>
-          </div>
+      <section className="hero-cta-gradient desktop:gap-[124px] desktop:rounded-t-[120px] flex flex-col items-center gap-[100px] pt-[32px] pb-[66px]">
+        <div className="desktop:flex hidden flex-col items-center gap-[16px]">
+          <Button
+            asChild
+            className="typography-cta-button text-semantic-text-default hover:bg-gsgs-neutral-100 h-auto min-h-0 min-w-[388px] rounded-[30px] bg-white px-[1.5em] py-[1.2em] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+          >
+            <a href={desktopHref}>{text}</a>
+          </Button>
           <p className="typography-body-2 text-semantic-text-secondary">{subText}</p>
         </div>
         <div className="desktop:flex-row desktop:max-w-[948px] flex w-full max-w-2/5 min-w-[230px] flex-col justify-center gap-[24px]">

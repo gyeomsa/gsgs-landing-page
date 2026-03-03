@@ -76,6 +76,25 @@
     @apply desktop:px-gsgs-24 px-gsgs-16;
   }
 
+  /* hero CTA 섹션 그라데이션 - 모바일: 위 흰색, 데스크탑: 위 파란색 */
+  .hero-cta-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.44) 0%,
+      var(--component-card-feature, rgba(143, 175, 255, 0.44)) 100%
+    );
+  }
+
+  @media (min-width: 90rem) {
+    .hero-cta-gradient {
+      background: linear-gradient(
+        180deg,
+        var(--component-card-feature, rgba(143, 175, 255, 0.44)) 0%,
+        rgba(255, 255, 255, 0.44) 100%
+      );
+    }
+  }
+
   /* speech-bubble - 말풍선 스타일 */
   .speech-bubble {
     position: relative;
