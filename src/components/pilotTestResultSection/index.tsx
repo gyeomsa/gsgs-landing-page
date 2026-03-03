@@ -1,22 +1,25 @@
 import SectionTitle from '@/components/shared/SectionTitle';
 
-import image01 from '@/assets/process/delivery01.png';
+import photo01 from '@/assets/hero/photo01.png';
+import pilot01 from '@/assets/pilot/pilot01.svg';
+import pilot02 from '@/assets/pilot/pilot02.svg';
+import pilot03 from '@/assets/pilot/pilot03.svg';
 
 const RESULT_DATA = [
   {
     label: '사용자 만족도',
     value: '89%',
-    image: image01,
+    image: pilot01,
   },
   {
     label: '재이용 의향',
     value: '88%',
-    image: image01,
+    image: pilot02,
   },
   {
     label: '평균 우회 시간',
     value: '15분',
-    image: image01,
+    image: pilot03,
   },
 ];
 
@@ -25,7 +28,8 @@ const SPEECH_BUBBLE_DATA =
 
 function TestimonialQuote({ quote }: { quote: string }) {
   return (
-    <div className="desktop:hidden gap-gsgs-12 flex flex-col items-center">
+    <div className="desktop:hidden flex flex-col items-center gap-3">
+      <img src={photo01} alt="파일럿 테스트 참여자" className="size-12 rounded-full object-cover" />
       <div className="speech-bubble typography-caption max-w-[218px] p-[22px] text-center whitespace-pre-line text-white">
         {quote}
       </div>
@@ -58,7 +62,14 @@ function PilotTestResultSection() {
       </div>
 
       <TestimonialQuote quote={SPEECH_BUBBLE_DATA} />
-      <p className="typography-caption desktop:block hidden">{SPEECH_BUBBLE_DATA}</p>
+      <div className="desktop:flex hidden flex-col items-center gap-3">
+        <img
+          src={photo01}
+          alt="파일럿 테스트 참여자"
+          className="size-12 rounded-full object-cover"
+        />
+        <p className="typography-caption text-center">{SPEECH_BUBBLE_DATA}</p>
+      </div>
     </section>
   );
 }

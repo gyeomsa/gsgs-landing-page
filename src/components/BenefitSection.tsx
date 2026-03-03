@@ -1,4 +1,5 @@
-import image01 from '@/assets/process/delivery01.png';
+import benefit01 from '@/assets/benefit/benefit01.png';
+import benefit02 from '@/assets/benefit/benefit02.png';
 
 import SectionTitle from './shared/SectionTitle';
 
@@ -6,12 +7,12 @@ const BENEFIT_DATA = [
   {
     title: '첫 배송 무료',
     description: ['첫 배송 수수료 100% 할인', '첫 배송 보상 2배 지급'],
-    image: image01,
+    image: benefit01,
   },
   {
     title: '전용 굿즈 증정',
     description: ['사전 예약자 한정 에코백'],
-    image: image01,
+    image: benefit02,
   },
 ];
 
