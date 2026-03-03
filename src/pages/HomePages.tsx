@@ -1,4 +1,5 @@
 import BenefitSection from '@/components/BenefitSection';
+import EndingSection from '@/components/EndingSection';
 import HeroSection from '@/components/HeroSection';
 import PilotTestResultSection from '@/components/pilotTestResultSection';
 import PreregistrationSection from '@/components/preRegistration/PreregistrationSection';
@@ -15,6 +16,7 @@ function HomePages() {
       <div id="register" className="desktop:block hidden">
         <PreregistrationSection />
       </div>
+      <EndingSection />
       <FloatingActionButtons />
     </div>
   );

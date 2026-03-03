@@ -18,10 +18,19 @@ import {
 } from '@/components/ui/select';
 
 import { supabase } from '@/lib/supabase';
+import { cn } from '@/lib/utils';
 
 import RegistrationSuccess from './RegistrationSuccess';
 import { INTEREST_ROLES, REGIONS, VALIDATION_LIMITS } from './constants';
 import { type RegistrationFormData, registrationSchema } from './schema';
+
+/* 공통 폼 스타일 - Input/Select 일관성 및 모바일 터치 영역(44px) */
+const INPUT_STYLE =
+  'typography-body-2 h-auto min-h-[44px] w-full rounded-md border border-[#CBD5E1] p-4 text-[#0F172A]';
+const SELECT_TRIGGER_STYLE =
+  'typography-body-2 h-auto! min-h-[44px] w-full! min-w-0! rounded-md border border-[#CBD5E1] p-4! text-[#0F172A]';
+const SELECT_ITEM_STYLE =
+  'typography-body-2 py-4 pl-4 pr-10 text-[#0F172A] min-h-[44px] focus:bg-[#F1F5F9] focus:text-[#0F172A] data-highlighted:bg-[#F1F5F9] data-highlighted:text-[#0F172A]';
 
 type FormFieldProps = {
   label: React.ReactNode;
@@ -35,7 +44,9 @@ function FormField({ label, error, labelHtmlFor, children }: FormFieldProps) {
 
   return (
     <Field data-invalid={isInvalid}>
-      <FieldLabel htmlFor={labelHtmlFor}>{label}</FieldLabel>
+      <FieldLabel htmlFor={labelHtmlFor} className="typography-body-1 text-[#0F172A]">
+        {label}
+      </FieldLabel>
       <FieldContent>{children}</FieldContent>
       <FieldError errors={error ? [error] : undefined} />
     </Field>
@@ -47,16 +58,34 @@ type CheckboxFormFieldProps = {
   error?: { message?: string };
   labelHtmlFor?: string;
   children: React.ReactNode;
+  compact?: boolean;
 };
 
-function CheckboxFormField({ label, error, labelHtmlFor, children }: CheckboxFormFieldProps) {
+function CheckboxFormField({
+  label,
+  error,
+  labelHtmlFor,
+  children,
+  compact,
+}: CheckboxFormFieldProps) {
   const isInvalid = !!error;
 
   return (
     <Field data-invalid={isInvalid} orientation="horizontal">
-      <FieldContent className="flex-row items-start gap-2">
+      <FieldContent
+        className={cn(
+          'min-h-[44px] flex-row items-center gap-3 py-1',
+          !compact && 'desktop:mb-[66px]'
+        )}
+      >
         {children}
-        <FieldLabel htmlFor={labelHtmlFor} className="cursor-pointer font-normal">
+        <FieldLabel
+          htmlFor={labelHtmlFor}
+          className={cn(
+            'typography-body-1 flex-1 cursor-pointer leading-tight text-[#0F172A]',
+            !compact && 'desktop:mb-[24px]'
+          )}
+        >
           {label}
         </FieldLabel>
       </FieldContent>
@@ -117,8 +146,8 @@ function RegistrationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md space-y-6">
-      <FieldGroup>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
+      <FieldGroup className="desktop:gap-7 gap-5">
         <FormField label="이름" error={errors.name} labelHtmlFor="name">
           <Input
             id="name"
@@ -127,6 +156,7 @@ function RegistrationForm() {
             maxLength={VALIDATION_LIMITS.name}
             aria-invalid={!!errors.name}
             {...register('name')}
+            className={INPUT_STYLE}
           />
         </FormField>
 
@@ -138,6 +168,7 @@ function RegistrationForm() {
             maxLength={VALIDATION_LIMITS.email}
             aria-invalid={!!errors.email}
             {...register('email')}
+            className={INPUT_STYLE}
           />
         </FormField>
 
@@ -149,13 +180,19 @@ function RegistrationForm() {
               <RadioGroup
                 value={field.value}
                 onValueChange={field.onChange}
-                className="flex flex-col gap-2"
+                className="desktop:gap-4 flex flex-col gap-3"
                 aria-invalid={!!errors.interestRole}
               >
                 {INTEREST_ROLES.map(role => (
-                  <div key={role} className="flex items-center gap-2">
-                    <RadioGroupItem value={role} id={`role-${role}`} />
-                    <Label htmlFor={`role-${role}`} className="cursor-pointer font-normal">
+                  <div
+                    key={role}
+                    className="flex min-h-[44px] cursor-pointer items-center gap-3 py-2"
+                  >
+                    <RadioGroupItem value={role} id={`role-${role}`} className="size-5 shrink-0" />
+                    <Label
+                      htmlFor={`role-${role}`}
+                      className="typography-body-1 flex-1 cursor-pointer font-normal text-[#0F172A]"
+                    >
                       {role}
                     </Label>
                   </div>
@@ -171,12 +208,12 @@ function RegistrationForm() {
             control={control}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-full" aria-invalid={!!errors.mainRegion}>
+                <SelectTrigger className={SELECT_TRIGGER_STYLE} aria-invalid={!!errors.mainRegion}>
                   <SelectValue placeholder="지역을 선택해주세요" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="typography-body-2 border-[#CBD5E1] bg-white text-[#0F172A]">
                   {REGIONS.map(region => (
-                    <SelectItem key={region} value={region}>
+                    <SelectItem key={region} value={region} className={SELECT_ITEM_STYLE}>
                       {region}
                     </SelectItem>
                   ))}
@@ -198,6 +235,7 @@ function RegistrationForm() {
             maxLength={VALIDATION_LIMITS.departureRegion}
             aria-invalid={!!errors.departureRegion}
             {...register('departureRegion')}
+            className={INPUT_STYLE}
           />
         </FormField>
 
@@ -213,54 +251,61 @@ function RegistrationForm() {
             maxLength={VALIDATION_LIMITS.arrivalRegion}
             aria-invalid={!!errors.arrivalRegion}
             {...register('arrivalRegion')}
+            className={INPUT_STYLE}
           />
         </FormField>
 
-        <CheckboxFormField
-          label="서비스 출시 알림 신청에 동의합니다"
-          error={errors.serviceNotificationConsent}
-          labelHtmlFor="serviceNotificationConsent"
-        >
-          <Controller
-            name="serviceNotificationConsent"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                id="serviceNotificationConsent"
-                checked={field.value}
-                onCheckedChange={value => field.onChange(value === true)}
-                aria-invalid={!!errors.serviceNotificationConsent}
-              />
-            )}
-          />
-        </CheckboxFormField>
+        <div className="flex w-full flex-col gap-[24px]">
+          <CheckboxFormField
+            compact
+            label="서비스 출시 알림 신청에 동의합니다"
+            error={errors.serviceNotificationConsent}
+            labelHtmlFor="serviceNotificationConsent"
+          >
+            <Controller
+              name="serviceNotificationConsent"
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  id="serviceNotificationConsent"
+                  checked={field.value}
+                  onCheckedChange={value => field.onChange(value === true)}
+                  aria-invalid={!!errors.serviceNotificationConsent}
+                  className="desktop:size-4 size-5 shrink-0"
+                />
+              )}
+            />
+          </CheckboxFormField>
 
-        <CheckboxFormField
-          label="개인 정보 수집 및 이용에 동의합니다"
-          error={errors.privacyConsent}
-          labelHtmlFor="privacyConsent"
-        >
-          <Controller
-            name="privacyConsent"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                id="privacyConsent"
-                checked={field.value}
-                onCheckedChange={value => field.onChange(value === true)}
-                aria-invalid={!!errors.privacyConsent}
-              />
-            )}
-          />
-        </CheckboxFormField>
+          <CheckboxFormField
+            compact
+            label="개인 정보 수집 및 이용에 동의합니다"
+            error={errors.privacyConsent}
+            labelHtmlFor="privacyConsent"
+          >
+            <Controller
+              name="privacyConsent"
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  id="privacyConsent"
+                  checked={field.value}
+                  onCheckedChange={value => field.onChange(value === true)}
+                  aria-invalid={!!errors.privacyConsent}
+                  className="desktop:size-4 size-5 shrink-0"
+                />
+              )}
+            />
+          </CheckboxFormField>
+        </div>
       </FieldGroup>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-full rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
+        className="typography-cta-button bg-primary text-primary-foreground hover:bg-primary/90 min-h-[48px] w-full rounded-md px-6 py-3 transition-colors disabled:pointer-events-none disabled:opacity-50"
       >
-        {isSubmitting ? '제출 중...' : '제출'}
+        {isSubmitting ? '사전등록 중...' : '사전등록 완료하기'}
       </button>
     </form>
   );
