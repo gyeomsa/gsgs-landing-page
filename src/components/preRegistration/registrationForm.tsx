@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+import { event } from '@/lib/analytics';
 import { supabase } from '@/lib/supabase';
 import { cn } from '@/lib/utils';
 
@@ -132,9 +133,11 @@ function RegistrationForm() {
       });
 
       if (error) throw error;
+      event('preregistration_complete');
       setIsSubmitted(true);
     } catch (error) {
       console.error('사전등록 실패:', error);
+      event('preregistration_error');
       toast.error('등록에 실패했습니다. 다시 시도해주세요.');
     } finally {
       setIsSubmitting(false);

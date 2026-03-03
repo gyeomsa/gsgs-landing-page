@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 
+import { Link } from 'react-router';
+
 import { Button } from '@/components/ui/button';
+
+import { event } from '@/lib/analytics';
 
 import brandIcon from '@/assets/hero/brand-icon.png';
 import desktopHero from '@/assets/hero/desktop-hero-set.png';
@@ -35,7 +39,11 @@ function FeatureSection({ children }: { children: ReactNode }) {
 }
 
 function HeroSection() {
-  const { text, subText, desktopHref } = HERO_SECTION_DATA.cta;
+  const { text, subText, desktopHref, mobileHref } = HERO_SECTION_DATA.cta;
+
+  const trackCtaClick = (location: string, device: string) => {
+    event('cta_click', { location, device });
+  };
 
   return (
     <>
@@ -61,8 +69,13 @@ function HeroSection() {
           <p className="typography-body-2 text-semantic-text-secondary mb-[16px] text-center whitespace-pre-line">
             {HERO_SECTION_DATA.description}
           </p>
-          <Button className="typography-button hover:bg-gsgs-neutral-100 h-auto min-h-0 w-full max-w-[320px] self-center rounded-[20px] bg-white px-[70px] py-[20px] text-[#222] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
-            {HERO_SECTION_DATA.cta.text}
+          <Button
+            asChild
+            className="typography-button hover:bg-gsgs-neutral-100 h-auto min-h-0 w-full max-w-[320px] self-center rounded-[20px] bg-white px-[70px] py-[20px] text-[#222] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+          >
+            <Link to={mobileHref} onClick={() => trackCtaClick('hero', 'mobile')}>
+              {HERO_SECTION_DATA.cta.text}
+            </Link>
           </Button>
           <p className="typography-body-2 text-semantic-text-secondary px-6 text-center">
             {HERO_SECTION_DATA.cta.subText}
@@ -115,7 +128,9 @@ function HeroSection() {
             asChild
             className="typography-cta-button text-semantic-text-default hover:bg-gsgs-neutral-100 h-auto min-h-0 min-w-[388px] rounded-[30px] bg-white px-[1.5em] py-[1.2em] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
           >
-            <a href={desktopHref}>{text}</a>
+            <a href={desktopHref} onClick={() => trackCtaClick('hero', 'desktop')}>
+              {text}
+            </a>
           </Button>
           <p className="typography-body-2 text-semantic-text-secondary">{subText}</p>
         </div>

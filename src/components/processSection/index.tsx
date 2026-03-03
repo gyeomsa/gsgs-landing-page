@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import SectionTitle from '@/components/shared/SectionTitle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+import { event } from '@/lib/analytics';
+
 import ProcessStepCard from './ProcessStepCard';
 import type { ProcessItem } from './ProcessStepCard';
 import ProcessTabSwitchButton from './ProcessTabSwitchButton';
@@ -67,7 +69,10 @@ function ProcessSection() {
       <SectionTitle description="How it works" title="이렇게 작동합니다" />
       <Tabs
         value={activeTab}
-        onValueChange={v => setActiveTab(v as TabValue)}
+        onValueChange={v => {
+          setActiveTab(v as TabValue);
+          event('tab_switch', { tab: v, section: 'process' });
+        }}
         className="flex w-full max-w-[950px] flex-col items-center"
       >
         <TabsList className="bg-gsgs-neutral-200 desktop:p-2 mb-8 inline-flex rounded-full border-0 p-1.5 shadow-none">
