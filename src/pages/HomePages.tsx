@@ -1,6 +1,7 @@
 import BenefitSection from '@/components/BenefitSection';
 import EndingSection from '@/components/EndingSection';
 import HeroSection from '@/components/HeroSection';
+import ProblemSolutionSection from '@/components/ProblemSolutionSection';
 import PilotTestResultSection from '@/components/pilotTestResultSection';
 import PreregistrationSection from '@/components/preRegistration/PreregistrationSection';
 import ProcessSection from '@/components/processSection';
@@ -10,6 +11,7 @@ function HomePages() {
   return (
     <div className="mx-auto">
       <HeroSection />
+      <ProblemSolutionSection />
       <ProcessSection />
       <PilotTestResultSection />
       <BenefitSection />
