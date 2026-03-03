@@ -62,7 +62,7 @@ function FloatingActionButtons() {
       }
     } else {
       await copyToClipboard(window.location.href);
-      event('share', { method: 'clipboard' });
+      event('share', { method: 'clipboard', location: 'floating' });
     }
   };
 

@@ -4,6 +4,8 @@
 
 ## 환경 변수 설정
 
+### 로컬 개발
+
 `.env` 파일에 다음 변수를 추가합니다.
 
 ```env
@@ -12,6 +14,17 @@ VITE_GA_ID=G-XXXXXXXXXX
 
 - **측정 ID**는 [Google Analytics](https://analytics.google.com/) → 관리 → 데이터 스트림 → 웹에서 확인할 수 있습니다.
 - `VITE_GA_ID`가 비어 있으면 트래킹이 비활성화됩니다. (개발 환경에서 안전하게 사용 가능)
+- **환경 변수 추가/수정 후** 반드시 `pnpm dev`를 재시작해야 적용됩니다.
+
+### 배포 환경
+
+`.env` 파일은 `.gitignore`에 포함되어 있어 Git에 포함되지 않습니다. 배포 플랫폼(Vercel, Netlify, Cloudflare Pages 등)에서 **환경 변수를 직접 설정**해야 합니다.
+
+```env
+VITE_GA_ID=G-XXXXXXXXXX
+```
+
+배포 플랫폼 대시보드 → 프로젝트 설정 → 환경 변수에서 위 변수를 추가한 뒤, **새로 빌드**해야 합니다.
 
 ## 구현 구조
 
