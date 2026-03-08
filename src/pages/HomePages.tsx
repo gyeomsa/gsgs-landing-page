@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import AppDownloadDialog from '@/components/AppDownloadDialog';
 import BenefitSection from '@/components/BenefitSection';
 import EndingSection from '@/components/EndingSection';
 import Footer from '@/components/Footer';
@@ -9,8 +12,11 @@ import ProcessSection from '@/components/processSection';
 import FloatingActionButtons from '@/components/shared/FloatingActionButtons';
 
 function HomePages() {
+  const [downloadDialogOpen, setDownloadDialogOpen] = useState(true);
+
   return (
     <div className="mx-auto">
+      <AppDownloadDialog open={downloadDialogOpen} onOpenChange={setDownloadDialogOpen} />
       <HeroSection />
       <ProblemSolutionSection />
       <ProcessSection />
@@ -21,7 +27,7 @@ function HomePages() {
       </div>
       <EndingSection />
       <Footer />
-      <FloatingActionButtons />
+      <FloatingActionButtons onOpenDownloadDialog={() => setDownloadDialogOpen(true)} />
     </div>
   );
 }
