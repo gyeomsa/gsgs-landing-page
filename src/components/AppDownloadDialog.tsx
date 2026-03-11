@@ -12,7 +12,8 @@ import endingImg from '@/assets/ending/ending_img.png';
 // const ONESTORE_LINK = 'https://onestore.co.kr/...';
 
 // 테스트용 APK 다운로드 링크 (배포 전)
-const APK_DOWNLOAD_LINK = ''; // TODO: APK 파일 URL 추가
+const APK_DOWNLOAD_LINK =
+  'https://expo.dev/accounts/gyeomsa/projects/gyeomsa-app/builds/209742da-984e-457a-9223-1ef12581d2e3';
 
 type AppDownloadDialogProps = {
   open: boolean;
