@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import { ArrowUpIcon, Share2Icon, UserPlusIcon } from 'lucide-react';
+import { ArrowUpIcon, DownloadIcon, Share2Icon, UserPlusIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { toast } from 'sonner';
 
 import { event } from '@/lib/analytics';
 import { copyToClipboard } from '@/lib/utils';
 
-function FloatingActionButtons() {
+type FloatingActionButtonsProps = {
+  onOpenDownloadDialog: () => void;
+};
+
+function FloatingActionButtons({ onOpenDownloadDialog }: FloatingActionButtonsProps) {
   const [showTopButton, setShowTopButton] = useState(false);
 
   useEffect(() => {
@@ -89,6 +93,14 @@ function FloatingActionButtons() {
           <ArrowUpIcon className="size-5" />
         </button>
       )}
+      <button
+        type="button"
+        onClick={onOpenDownloadDialog}
+        className={buttonBaseClass}
+        aria-label="앱 다운로드"
+      >
+        <DownloadIcon className="size-5" />
+      </button>
       <button type="button" onClick={handleShare} className={buttonBaseClass} aria-label="공유하기">
         <Share2Icon className="size-5" />
       </button>
