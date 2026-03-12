@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ArrowUpIcon, DownloadIcon, Share2Icon, UserPlusIcon } from 'lucide-react';
-import { Link } from 'react-router';
+import { ArrowUpIcon, DownloadIcon, Share2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { event } from '@/lib/analytics';
@@ -25,11 +24,6 @@ function FloatingActionButtons({ onOpenDownloadDialog }: FloatingActionButtonsPr
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToRegisterSection = () => {
-    const element = document.getElementById('register');
-    element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleShare = async () => {
@@ -103,35 +97,6 @@ function FloatingActionButtons({ onOpenDownloadDialog }: FloatingActionButtonsPr
       </button>
       <button type="button" onClick={handleShare} className={buttonBaseClass} aria-label="공유하기">
         <Share2Icon className="size-5" />
-      </button>
-      <Link
-        to="/preregistration"
-        className={`${buttonBaseClass} desktop:hidden`}
-        aria-label="사전 등록"
-        onClick={() =>
-          event('cta_click', {
-            location: 'floating',
-            device: 'mobile',
-            event_label: '플로팅 버튼 사전등록 (모바일)',
-          })
-        }
-      >
-        <UserPlusIcon className="size-5" />
-      </Link>
-      <button
-        type="button"
-        onClick={() => {
-          event('cta_click', {
-            location: 'floating',
-            device: 'desktop',
-            event_label: '플로팅 버튼 사전등록 (데스크탑)',
-          });
-          scrollToRegisterSection();
-        }}
-        className={`${buttonBaseClass} desktop:flex hidden`}
-        aria-label="사전 등록"
-      >
-        <UserPlusIcon className="size-5" />
       </button>
     </div>
   );

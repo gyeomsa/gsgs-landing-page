@@ -97,7 +97,6 @@ function CheckboxFormField({
 
 function RegistrationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -119,7 +118,6 @@ function RegistrationForm() {
   });
 
   const onSubmit = async (data: RegistrationFormData) => {
-    setIsSubmitting(true);
     try {
       const { error } = await supabase.from('preregistrations').insert({
         name: data.name,
@@ -139,8 +137,6 @@ function RegistrationForm() {
       console.error('사전등록 실패:', error);
       event('preregistration_error', { event_label: '사전등록 실패' });
       toast.error('등록에 실패했습니다. 다시 시도해주세요.');
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -305,10 +301,10 @@ function RegistrationForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="typography-cta-button bg-primary text-primary-foreground hover:bg-primary/90 min-h-[48px] w-full rounded-md px-6 py-3 transition-colors disabled:pointer-events-none disabled:opacity-50"
+        disabled
+        className="typography-cta-button bg-primary text-primary-foreground hover:bg-primary/90 min-h-[48px] w-full rounded-md px-6 py-3 transition-colors disabled:pointer-events-none disabled:bg-gray-300"
       >
-        {isSubmitting ? '사전등록 중...' : '사전등록 완료하기'}
+        사전등록 완료하기
       </button>
     </form>
   );
