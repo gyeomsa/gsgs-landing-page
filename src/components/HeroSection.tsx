@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 
 import { Link } from 'react-router';
-import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 
@@ -56,12 +55,6 @@ function HeroSection() {
     });
   };
 
-  const handleCtaClick = (e: React.MouseEvent, location: string, device: string) => {
-    e.preventDefault();
-    trackCtaClick(location, device);
-    toast.info('사전 등록 이벤트가 종료되었습니다');
-  };
-
   return (
     <>
       {/* 모바일 사이즈 히어로 섹션 */}
@@ -90,7 +83,7 @@ function HeroSection() {
             asChild
             className="typography-button hover:bg-gsgs-neutral-100 h-auto min-h-0 w-full max-w-[320px] self-center rounded-[20px] bg-white px-[70px] py-[20px] text-[#222] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
           >
-            <Link to={mobileHref} onClick={e => handleCtaClick(e, 'hero', 'mobile')}>
+            <Link to={mobileHref} onClick={() => trackCtaClick('hero', 'mobile')}>
               {HERO_SECTION_DATA.cta.text}
             </Link>
           </Button>
@@ -145,7 +138,7 @@ function HeroSection() {
             asChild
             className="typography-cta-button text-semantic-text-default hover:bg-gsgs-neutral-100 h-auto min-h-0 min-w-[388px] rounded-[30px] bg-white px-[1.5em] py-[1.2em] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
           >
-            <a href={desktopHref} onClick={e => handleCtaClick(e, 'hero', 'desktop')}>
+            <a href={desktopHref} onClick={() => trackCtaClick('hero', 'desktop')}>
               {text}
             </a>
           </Button>

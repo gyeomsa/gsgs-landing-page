@@ -301,7 +301,6 @@ function RegistrationForm() {
 
       <button
         type="submit"
-        disabled
         className="typography-cta-button bg-primary text-primary-foreground hover:bg-primary/90 min-h-[48px] w-full rounded-md px-6 py-3 transition-colors disabled:pointer-events-none disabled:bg-gray-300"
       >
         사전등록 완료하기
